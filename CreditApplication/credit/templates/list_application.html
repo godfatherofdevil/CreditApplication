@@ -1,0 +1,15 @@
+{% load rest_framework %}
+    
+{% for application in applications %}
+    <p>
+        <small>created on : {{ application.created_on }}</small><br>
+        <small>sent on : {{ application.sent_on }}</small><br>
+        <small>customer details: {{ application.customer_profile.first_name }} {{ application.customer_profile.last_name }}</small><br>
+        <small>credit type: {{ application.credit_proposal.credit_type }}</small><br>
+        <small>current status: {{ application.status }}</small><br>
+    </p>
+    <a href="{% url 'send_application' pk %}">Send this application</a>
+{% endfor %}
+{% if is_post %}
+    {{ request_data }}
+{% endif%}
