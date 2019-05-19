@@ -17,13 +17,12 @@ class HasGroupPermission(permissions.BasePermission):
 
     def has_permission(self, request, view):
         # Get a mapping of methods -> required group.
-        required_groups_mapping = getattr(vies, "required_groups", {})
+        required_groups_mapping = getattr(view, "required_groups", {})
 
         # determine the required groups for this particular request method.
         required_groups = required_groups_mapping.get(request.method, [])
 
-        # Return True if user has all the required groups or is staff.
-        return all(
-            [is_in_group(request.user, group_name) if group_name != "__all__" else True for group_name in required_groups] or
-            (request.user and request.user.is_staff)
-            )
+        # Return True if user has any of the required groups or is staff.
+        return any(
+            [is_in_group(request.user, group_name) if group_name != "__all__" else True for group_name in required_groups]
+            ) or (request.user and request.user.is_staff)
