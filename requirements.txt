@@ -2,7 +2,7 @@ Django==2.2.1
 django-filter==2.1.0
 django-filters==0.2.1
 django-rest-framework-roles==0.6
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 djangorestframework-filter==0.2.2
 pytz==2019.1
 sqlparse==0.3.0
